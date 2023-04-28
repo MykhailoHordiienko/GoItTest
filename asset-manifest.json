@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/GoItTest/static/css/main.073c9b0a.css",
+    "main.js": "/GoItTest/static/js/main.b8dfa4f2.js",
+    "static/js/787.0b4c2dfb.chunk.js": "/GoItTest/static/js/787.0b4c2dfb.chunk.js",
+    "static/media/logo.svg": "/GoItTest/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/GoItTest/index.html",
+    "main.073c9b0a.css.map": "/GoItTest/static/css/main.073c9b0a.css.map",
+    "main.b8dfa4f2.js.map": "/GoItTest/static/js/main.b8dfa4f2.js.map",
+    "787.0b4c2dfb.chunk.js.map": "/GoItTest/static/js/787.0b4c2dfb.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.b8dfa4f2.js"
+  ]
+}
