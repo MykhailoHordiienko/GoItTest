@@ -14,9 +14,11 @@ module.exports = {
         "linear-gradient(114.99deg, #471CA9 -0.99%, #5736A3 54.28%, #4B2A99 78.99%)",
     },
     colors: {
+      mainBlack: "#373737",
       mainWight: "#EBD8FF",
       mainBg: "#766A92",
-      accentLink: "#a5b4fc",
+      mainBtnColor: "#EBD8FF",
+      accentBtnColor: "#5CD3A8",
     },
   },
   plugins: [],

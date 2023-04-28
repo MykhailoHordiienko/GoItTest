@@ -7,19 +7,9 @@
 #root {
   @apply flex flex-col h-screen;
 }
-
-.header {
-  @apply h-[100px] bg-mainGradient rounded-b-[20px];
+body {
+  @apply font-sans text-mainBlack;
 }
-.headerNav {
-  @apply w-full h-full flex items-center text-mainWight hover:text-accentLink hover:animate-pulse;
-}
-.tweetsLink {
-  @apply w-full h-full flex items-center justify-center;
-}
-.main {
-  @apply bg-mainBg grow rounded-t-[20px];
-}
-.mainSection {
-  @apply p-[40px] mx-auto max-w-[1440px];
+.button {
+  @apply grid place-items-center w-[196px] h-[50px] rounded-[10px] bg-mainBtnColor hover:bg-accentBtnColor transition-colors;
 }

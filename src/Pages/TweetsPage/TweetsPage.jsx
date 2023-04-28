@@ -6,7 +6,11 @@ export const TweetsPage = () => {
 
   return (
     <>
-      <Link to={location.state?.from ?? "/"}>Back</Link>
+      <Link
+        className="button"
+        to={location.state?.from ?? "/"}>
+        Back
+      </Link>
       <TweetsList />
     </>
   );

@@ -1,24 +1,13 @@
-import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 export const Layout = () => {
-  const location = useLocation();
-
   return (
     <>
-      <header className="header">
-        <nav className="headerNav">
-          <NavLink
-            className={({ isActive }) =>
-              isActive ? "tweetsLink animate-pulse" : "tweetsLink"
-            }
-            to="/tweets"
-            state={{ from: location }}>
-            Tweets
-          </NavLink>
-        </nav>
+      <header className="flex items-center justify-center h-[100px] bg-mainGradient rounded-b-[20px]">
+        <p className="text-[24px] text-mainWight">Wonderful Header</p>
       </header>
-      <main className="main">
-        <section className="mainSection">
+      <main className="bg-mainBg grow rounded-t-[20px]">
+        <section className="p-[40px] mx-auto max-w-[1440px]">
           <Outlet />
         </section>
       </main>
