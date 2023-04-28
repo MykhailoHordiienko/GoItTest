@@ -17,10 +17,10 @@ export const TweetItem = () => {
                 </div>
               </div>
             </div>
-            <p className="mb-[16px]"> 777 tweets</p>
-            <p className="mb-[26px]">100,501 Followers</p>
+            <p className="mb-[16px] text"> 777 tweets</p>
+            <p className="mb-[26px] text">100,501 Followers</p>
             <button
-              className="mb-[36px]"
+              className="mb-[36px] button"
               type="button">
               Button
             </button>

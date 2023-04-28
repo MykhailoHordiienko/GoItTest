@@ -11,5 +11,8 @@ body {
   @apply font-sans text-mainBlack;
 }
 .button {
-  @apply grid place-items-center w-[196px] h-[50px] rounded-[10px] bg-mainBtnColor hover:bg-accentBtnColor shadow-btnBoxShadow transition-colors;
+  @apply grid place-items-center w-[196px] h-[50px] rounded-[10px] uppercase font-semibold text-[18px]/[22px] bg-mainBtnColor hover:bg-accentBtnColor shadow-btnBoxShadow transition-colors;
+}
+.text {
+  @apply uppercase font-medium text-[20px]/[24px] text-mainWight;
 }
