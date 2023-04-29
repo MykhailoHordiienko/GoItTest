@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/GoItTest/static/css/main.b4c24ad7.css",
-    "main.js": "/GoItTest/static/js/main.5eda8360.js",
+    "main.css": "/GoItTest/static/css/main.d7b7faf9.css",
+    "main.js": "/GoItTest/static/js/main.2dec77ad.js",
     "static/media/hello-gif.gif": "/GoItTest/static/media/hello-gif.ab3dd96ca86282874f07.gif",
     "static/media/defaultImg.jpeg": "/GoItTest/static/media/defaultImg.60157fd3f948049ca022.jpeg",
     "static/media/bg-tweet.png": "/GoItTest/static/media/bg-tweet.010ab3c33bc13f300d33.png",
     "index.html": "/GoItTest/index.html",
-    "main.b4c24ad7.css.map": "/GoItTest/static/css/main.b4c24ad7.css.map",
-    "main.5eda8360.js.map": "/GoItTest/static/js/main.5eda8360.js.map"
+    "main.d7b7faf9.css.map": "/GoItTest/static/css/main.d7b7faf9.css.map",
+    "main.2dec77ad.js.map": "/GoItTest/static/js/main.2dec77ad.js.map"
   },
   "entrypoints": [
-    "static/css/main.b4c24ad7.css",
-    "static/js/main.5eda8360.js"
+    "static/css/main.d7b7faf9.css",
+    "static/js/main.2dec77ad.js"
   ]
 }
