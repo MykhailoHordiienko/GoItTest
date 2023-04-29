@@ -1,9 +1,9 @@
-export const Dropdown = ({ getVisibleTweets }) => {
+export const Dropdown = ({ getVisibleTweets, filter }) => {
   return (
     <div className="w-full">
       <select
         className="select"
-        defaultValue="showAll"
+        defaultValue={filter}
         onChange={getVisibleTweets}>
         <option value="showAll">Show All</option>
         <option value="follow">Follow</option>

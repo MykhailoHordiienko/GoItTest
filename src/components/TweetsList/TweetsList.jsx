@@ -8,6 +8,7 @@ import { Pagination } from "components/Pagination/Pagination";
 import { Dropdown } from "components/Dropdown/Dropdown";
 const LOCAL_STORAGE_KEY = "LOCALSTORAGEKEY";
 const CURRENT_PAGE = "CURRENTPAGE";
+const CURRENT_FILTER = "CURRENTFILTER";
 
 let PageSize = 3;
 
@@ -18,11 +19,11 @@ export const TweetsList = () => {
   const [currentPage, setCurrentPage] = useState(() => {
     return getLocalStorage(CURRENT_PAGE);
   });
-  const [visibleTweets, setVisibleTweets] = useState(tweets);
+  const [filter, setFilter] = useState(() => {
+    return getLocalStorage(CURRENT_FILTER);
+  });
   const [loader, setLoader] = useState(false);
   const [error, setError] = useState(false);
-
-  console.log(visibleTweets);
 
   useEffect(() => {
     const query = async () => {
@@ -58,37 +59,49 @@ export const TweetsList = () => {
     [tweets]
   );
 
-  const handleChangePage = useCallback((page) => {
-    setCurrentPage(page);
-    saveLocalStorage(CURRENT_PAGE, page);
-  }, []);
+  const handleChangePage = useCallback(
+    (page) => {
+      setCurrentPage(page);
+      saveLocalStorage(CURRENT_PAGE, page);
+      saveLocalStorage(CURRENT_FILTER, filter);
+    },
+    [filter]
+  );
 
   const getVisibleTweets = (e) => {
-    if (!e) {
-      return setVisibleTweets(tweets);
-    }
-    switch (e.target.value) {
-      case "showAll":
-        return setVisibleTweets(tweets);
-      case "follow":
-        return setVisibleTweets(tweets.filter((item) => !item.follow));
-      case "followings":
-        return setVisibleTweets(tweets.filter((item) => item.follow));
-
-      default:
-        return tweets;
-    }
+    setFilter(e.target.value.toString());
+    setCurrentPage(1);
+    saveLocalStorage(CURRENT_PAGE, 1);
+    saveLocalStorage(CURRENT_FILTER, e.target.value);
   };
 
-  const currentTweets = useMemo(() => {
-    if (!visibleTweets) {
-      return;
+  const [currentTweets, length] = useMemo(() => {
+    if (!tweets) {
+      return [[], 0];
     }
     const firstPageIndex = (currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;
-    console.log(visibleTweets.slice(firstPageIndex, lastPageIndex));
-    return visibleTweets.slice(firstPageIndex, lastPageIndex);
-  }, [currentPage, visibleTweets]);
+    switch (filter) {
+      case "showAll":
+        const showAll = tweets.slice(firstPageIndex, lastPageIndex);
+        return [showAll, tweets.length];
+      case "follow":
+        const follow = tweets
+          .filter((item) => !item.follow)
+          .slice(firstPageIndex, lastPageIndex);
+        const followLength = tweets.filter((item) => !item.follow).length;
+        return [follow, followLength];
+      case "followings":
+        const followings = tweets
+          .filter((item) => item.follow)
+          .slice(firstPageIndex, lastPageIndex);
+        const followingsLength = tweets.filter((item) => item.follow).length;
+        return [followings, followingsLength];
+
+      default:
+        return [[], 0];
+    }
+  }, [currentPage, filter, tweets]);
 
   if (error) {
     return <ErrorPage />;
@@ -96,7 +109,10 @@ export const TweetsList = () => {
 
   return (
     <>
-      <Dropdown getVisibleTweets={getVisibleTweets} />
+      <Dropdown
+        getVisibleTweets={getVisibleTweets}
+        filter={filter}
+      />
       <ul className="flex items-center justify-center gap-[48px]">
         {loader || !currentTweets
           ? "Loading..."
@@ -108,10 +124,10 @@ export const TweetsList = () => {
               />
             ))}
       </ul>
-      {visibleTweets && (
+      {currentTweets && (
         <Pagination
           currentPage={currentPage}
-          totalCount={visibleTweets.length}
+          totalCount={length}
           pageSize={PageSize}
           onPageChange={handleChangePage}
         />
