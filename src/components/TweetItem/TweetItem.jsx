@@ -1,9 +1,24 @@
 import { useState } from "react";
 import defaultUserAvatar from "../../gif/Hansel.png";
 
-export const TweetItem = ({ tweet }) => {
-  const [isFollow, setIsFollow] = useState(false);
-  const { avatar = defaultUserAvatar, followers, tweets, user, id } = tweet;
+export const TweetItem = ({ tweet, updateTweetsLocalStorage }) => {
+  const {
+    avatar = defaultUserAvatar,
+    followers,
+    tweets,
+    id,
+    follow = false,
+  } = tweet;
+  const [isFollow, setIsFollow] = useState(follow);
+  const [count, setCount] = useState(followers);
+
+  const handleToggleFollow = () => {
+    const updateFollow = !isFollow;
+    const updateCount = isFollow ? count - 1 : count + 1;
+    setIsFollow(updateFollow);
+    setCount(updateCount);
+    updateTweetsLocalStorage({ id, count: updateCount, follow: updateFollow });
+  };
 
   return (
     <li>
@@ -21,17 +36,17 @@ export const TweetItem = ({ tweet }) => {
                 </div>
               </div>
             </div>
-            <p className="mb-[16px] text"> {user} tweets</p>
             <p className="mb-[16px] text">
               {tweets.toLocaleString("en-US")} Tweets
             </p>
             <p className="mb-[26px] text">
-              {followers.toLocaleString("en-US")} Followers
+              {count.toLocaleString("en-US")} Followers
             </p>
             <button
-              className="mb-[36px] button"
+              onClick={handleToggleFollow}
+              className={`${isFollow ? "buttonActive" : "button"} mb-[36px]`}
               type="button">
-              Button
+              {isFollow ? "Following" : "Follow"}
             </button>
           </div>
         </div>

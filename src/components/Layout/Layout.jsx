@@ -7,7 +7,7 @@ export const Layout = () => {
         <p className="text-[24px] text-mainWight">Wonderful Header</p>
       </header>
       <main className="bg-mainBg grow rounded-t-[20px]">
-        <section className="p-[40px] mx-auto max-w-[1440px]">
+        <section className="p-[40px] mx-auto max-w-[1440px] flex flex-col gap-[48px]">
           <Outlet />
         </section>
       </main>

@@ -22,6 +22,7 @@ module.exports = {
       mainBg: "#766A92",
       mainBtnColor: "#EBD8FF",
       accentBtnColor: "#5CD3A8",
+      white: "#ffffff",
     },
     boxShadow: {
       btnBoxShadow: "0px 3.43693px 3.43693px rgba(0, 0, 0, 0.25)",

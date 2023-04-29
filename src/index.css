@@ -11,8 +11,24 @@ body {
   @apply font-sans text-mainBlack;
 }
 .button {
-  @apply grid place-items-center w-[196px] h-[50px] rounded-[10px] uppercase font-semibold text-[18px]/[22px] bg-mainBtnColor hover:bg-accentBtnColor shadow-btnBoxShadow transition-colors;
+  @apply grid place-items-center w-[196px] h-[50px] rounded-[10px] uppercase font-semibold text-[18px]/[22px] bg-mainBtnColor hover:bg-accentBtnColor focus-visible:outline-accentBtnColor shadow-btnBoxShadow transition-colors;
+}
+.buttonActive {
+  @apply grid place-items-center w-[196px] h-[50px] rounded-[10px] uppercase font-semibold text-[18px]/[22px] bg-accentBtnColor hover:bg-mainBtnColor focus-visible:outline-mainBtnColor shadow-btnBoxShadow transition-colors;
 }
 .text {
   @apply uppercase font-medium text-[20px]/[24px] text-mainWight;
+}
+.select {
+  @apply w-full p-[12px] uppercase text-mainBlack bg-mainWight border rounded-md outline-none appearance-none focus:border-accentBtnColor;
+}
+
+.paginationItems {
+  @apply grid place-items-center w-[24px] h-[24px] rounded-full bg-mainWight hover:bg-accentBtnColor focus:bg-accentBtnColor disabled:opacity-50 disabled:hover:bg-mainWight disabled:focus:bg-mainWight;
+}
+.paginationItemsCurrent {
+  @apply grid place-items-center w-[24px] h-[24px] rounded-full bg-accentBtnColor cursor-not-allowed;
+}
+.paginationDots {
+  @apply grid place-items-center w-[24px] h-[24px] rounded-full cursor-default bg-mainWight;
 }
