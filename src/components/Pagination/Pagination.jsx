@@ -1,4 +1,4 @@
-import { usePagination, DOTS } from '../hooks/usePagination';
+import { usePagination, DOTS } from '../../hooks/usePagination';
 export const Pagination = ({
   onPageChange,
   totalCount,

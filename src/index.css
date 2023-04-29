@@ -11,7 +11,7 @@ body {
   @apply font-sans text-mainBlack;
 }
 .button {
-  @apply grid place-items-center w-[196px] h-[50px] rounded-[10px] uppercase font-semibold text-[18px]/[22px] bg-mainBtnColor hover:bg-accentBtnColor focus-visible:outline-accentBtnColor shadow-btnBoxShadow transition-colors;
+  @apply grid place-items-center w-[196px] h-[50px] rounded-[10px] uppercase font-semibold text-[18px]/[22px] bg-mainBtnColor hover:bg-accentBtnColor focus-visible:outline-accentBtnColor shadow-btnBoxShadow transition-colors disabled:opacity-30;
 }
 .buttonActive {
   @apply grid place-items-center w-[196px] h-[50px] rounded-[10px] uppercase font-semibold text-[18px]/[22px] bg-accentBtnColor hover:bg-mainBtnColor focus-visible:outline-mainBtnColor shadow-btnBoxShadow transition-colors;

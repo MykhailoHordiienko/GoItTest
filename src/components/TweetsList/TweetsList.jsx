@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
 import { TweetItem } from '../TweetItem/TweetItem';
-import { getTweets } from 'components/services/services';
-import { saveLocalStorage } from 'components/helpers/localStorageService';
-import { getLocalStorage } from 'components/helpers/localStorageService';
+import { getTweetsPagination } from 'services/services';
+import { saveLocalStorage } from 'helpers/localStorageService';
+import { getLocalStorage } from 'helpers/localStorageService';
 import { ErrorPage } from 'components/ErrorPage/ErrorPage';
 import { Pagination } from 'components/Pagination/Pagination';
 import { Dropdown } from 'components/Dropdown/Dropdown';
-import { useFilterPagination } from 'components/hooks/useFilterPagination';
+import { useFilterPagination } from 'hooks/useFilterPagination';
 import { Loader } from 'components/Loader/Loader';
 const LOCAL_STORAGE_KEY = 'LOCALSTORAGEKEY';
 const CURRENT_PAGE = 'CURRENTPAGE';
@@ -15,7 +15,7 @@ let pageSize = 3;
 
 export const TweetsList = () => {
   const [tweets, setTweets] = useState(() => {
-    return getLocalStorage(LOCAL_STORAGE_KEY);
+    return getLocalStorage(LOCAL_STORAGE_KEY) ?? [];
   });
   const [currentPage, setCurrentPage] = useState(() => {
     return getLocalStorage(CURRENT_PAGE) ?? 1;
@@ -23,6 +23,7 @@ export const TweetsList = () => {
   const [filter, setFilter] = useState(() => {
     return getLocalStorage(CURRENT_FILTER) ?? 'showAll';
   });
+  const [dataEnd, setDataEnd] = useState(false);
   const [loader, setLoader] = useState(false);
   const [error, setError] = useState(false);
 
@@ -30,7 +31,7 @@ export const TweetsList = () => {
     const query = async () => {
       try {
         setLoader(true);
-        const res = await getTweets();
+        const res = await getTweetsPagination({ page: 1, limit: pageSize });
         setTweets(res);
         saveLocalStorage(LOCAL_STORAGE_KEY, res);
       } catch (error) {
@@ -41,10 +42,31 @@ export const TweetsList = () => {
       }
     };
 
-    if (!tweets) {
+    if (tweets.length <= 0) {
       query();
     }
   }, [tweets]);
+
+  const loadMore = async () => {
+    try {
+      setLoader(true);
+      const res = await getTweetsPagination({
+        page: currentPage + 1,
+        limit: pageSize,
+      });
+      if (res.length <= 0) {
+        setDataEnd(true);
+        return;
+      }
+      setTweets(prev => [...prev, ...res]);
+      saveLocalStorage(LOCAL_STORAGE_KEY, [...tweets, ...res]);
+    } catch (error) {
+      setError(true);
+      console.log(`Message: ${error.message} Code: ${error.name}`);
+    } finally {
+      setLoader(false);
+    }
+  };
 
   const updateTweetsLocalStorage = useCallback(
     ({ id, follow, count }) => {
@@ -83,6 +105,9 @@ export const TweetsList = () => {
     pageSize,
   });
 
+  const needShowLoadMoreBTn =
+    currentPage * pageSize === tweets.length && filter === 'showAll';
+
   if (error) {
     return <ErrorPage />;
   }
@@ -95,13 +120,17 @@ export const TweetsList = () => {
         <>
           <Dropdown getVisibleTweets={getVisibleTweets} filter={filter} />
           <ul className="flex items-center justify-center gap-[48px]">
-            {currentTweets.map(tweet => (
-              <TweetItem
-                updateTweetsLocalStorage={updateTweetsLocalStorage}
-                key={tweet.id}
-                tweet={tweet}
-              />
-            ))}
+            {currentTweets.length <= 0 ? (
+              <ErrorPage text={'No Tweets In This Filter'} />
+            ) : (
+              currentTweets.map(tweet => (
+                <TweetItem
+                  updateTweetsLocalStorage={updateTweetsLocalStorage}
+                  key={tweet.id}
+                  tweet={tweet}
+                />
+              ))
+            )}
           </ul>
           {currentTweets && (
             <Pagination
@@ -110,6 +139,16 @@ export const TweetsList = () => {
               pageSize={pageSize}
               onPageChange={handleChangePage}
             />
+          )}
+          {needShowLoadMoreBTn && (
+            <button
+              className="button mx-auto"
+              type="button"
+              disabled={dataEnd}
+              onClick={loadMore}
+            >
+              {dataEnd ? 'No More Tweets ' : 'Load More'}
+            </button>
           )}
         </>
       )}
