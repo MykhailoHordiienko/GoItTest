@@ -1,4 +1,4 @@
-import { usePagination, DOTS } from "../helpers/usePagination";
+import { usePagination, DOTS } from '../hooks/usePagination';
 export const Pagination = ({
   onPageChange,
   totalCount,
@@ -33,33 +33,31 @@ export const Pagination = ({
           className="paginationItems"
           type="button"
           disabled={currentPage === 1}
-          onClick={onPrevious}>
-          {"<"}
+          onClick={onPrevious}
+        >
+          {'<'}
         </button>
       </li>
       {paginationRange.map((pageNumber, idx) => {
         if (pageNumber === DOTS) {
           return (
-            <li
-              className="paginationDots"
-              key={pageNumber + idx}>
+            <li className="paginationDots" key={pageNumber + idx}>
               &#8230;
             </li>
           );
         }
 
         return (
-          <li
-            key={pageNumber}
-            onClick={() => onPageChange(pageNumber)}>
+          <li key={pageNumber} onClick={() => onPageChange(pageNumber)}>
             <button
               className={`${
                 pageNumber === currentPage
-                  ? "paginationItemsCurrent"
-                  : "paginationItems"
+                  ? 'paginationItemsCurrent'
+                  : 'paginationItems'
               }`}
               disabled={pageNumber === currentPage}
-              type="button">
+              type="button"
+            >
               {pageNumber}
             </button>
           </li>
@@ -70,8 +68,9 @@ export const Pagination = ({
           className="paginationItems"
           type="button"
           disabled={currentPage === lastPage}
-          onClick={onNext}>
-          {">"}
+          onClick={onNext}
+        >
+          {'>'}
         </button>
       </li>
     </ul>

@@ -4,7 +4,8 @@ export const Dropdown = ({ getVisibleTweets, filter }) => {
       <select
         className="select"
         defaultValue={filter}
-        onChange={getVisibleTweets}>
+        onChange={getVisibleTweets}
+      >
         <option value="showAll">Show All</option>
         <option value="follow">Follow</option>
         <option value="followings">Followings</option>

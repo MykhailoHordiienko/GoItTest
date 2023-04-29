@@ -1,4 +1,4 @@
-import DefaultJpeg from "../../img/defaultImg.jpeg";
+import DefaultJpeg from '../../img/defaultImg.jpeg';
 
 export const ErrorPage = () => {
   return (

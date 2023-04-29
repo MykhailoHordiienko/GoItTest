@@ -1,5 +1,5 @@
-import { useState } from "react";
-import defaultUserAvatar from "../../gif/Hansel.png";
+import { useState } from 'react';
+import defaultUserAvatar from '../../img/Hansel.png';
 
 export const TweetItem = ({ tweet, updateTweetsLocalStorage }) => {
   const {
@@ -37,16 +37,17 @@ export const TweetItem = ({ tweet, updateTweetsLocalStorage }) => {
               </div>
             </div>
             <p className="mb-[16px] text">
-              {tweets.toLocaleString("en-US")} Tweets
+              {tweets.toLocaleString('en-US')} Tweets
             </p>
             <p className="mb-[26px] text">
-              {count.toLocaleString("en-US")} Followers
+              {count.toLocaleString('en-US')} Followers
             </p>
             <button
               onClick={handleToggleFollow}
-              className={`${isFollow ? "buttonActive" : "button"} mb-[36px]`}
-              type="button">
-              {isFollow ? "Following" : "Follow"}
+              className={`${isFollow ? 'buttonActive' : 'button'} mb-[36px]`}
+              type="button"
+            >
+              {isFollow ? 'Following' : 'Follow'}
             </button>
           </div>
         </div>
