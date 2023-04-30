@@ -1,3 +1,5 @@
+import { Loader } from 'components/Loader/Loader';
+import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
 export const Layout = () => {
@@ -8,7 +10,9 @@ export const Layout = () => {
       </header>
       <main className="bg-mainBg grow rounded-t-[20px]">
         <section className="p-[40px] mx-auto max-w-[1440px] flex flex-col gap-[48px]">
-          <Outlet />
+          <Suspense fallback={<Loader />}>
+            <Outlet />
+          </Suspense>
         </section>
       </main>
     </>
