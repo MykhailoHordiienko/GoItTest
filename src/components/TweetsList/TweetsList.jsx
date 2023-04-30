@@ -4,7 +4,7 @@ import { ErrorPage } from 'components/ErrorPage/ErrorPage';
 export const TweetsList = ({ currentTweets, updateTweetsLocalStorage }) => {
   return (
     <>
-      <ul className="flex items-center justify-center gap-[48px]">
+      <ul className="flex flex-col lg:flex-row items-center justify-center gap-[24px]">
         {currentTweets.length <= 0 ? (
           <ErrorPage text={'No Tweets In This Filter'} />
         ) : (
